@@ -5,9 +5,9 @@ spring:
     banner-mode: "off"
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1/small_admin?serverTimezone=UTC&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true
-    userName: small_admin
-    password: small_admin
+    url: jdbc:mysql://192.168.100.196/small_admin?serverTimezone=UTC&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true
+    userName: root
+    password: 123456
     initialSize: 1
     minIdle: 1
     maxActive: 20
@@ -25,7 +25,7 @@ spring:
 logging:
   config: classpath:config/log4j2.xml
 redisson:
-  url: https://coding.net/u/fengy/p/small-config-common/git/raw/master/config/redisson.yml
+  url: https://github.com/itritritr/github-test/edit/master/config/redisson.yml
 
 jwt:
   expire: 3600
