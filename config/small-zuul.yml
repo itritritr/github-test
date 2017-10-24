@@ -1,0 +1,58 @@
+server:
+  port: 8008
+
+zuul:
+  ignored-services: "*"
+  # sensitive-headers:
+  routes:
+    admin:
+      path: /back/**
+      serviceId: small-admin
+
+ribbon:
+  eureka:
+    enabled: true
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: false
+
+feign:
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1000 #并发执行的最大线程数，默认10
+      maxQueueSize: 1000 #BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 500 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 50000
+
+redisson:
+  url: https://coding.net/u/fengy/p/small-config-common/git/raw/master/config/redisson.yml
+
+auth:
+  user:
+    token-header: Authorization
+    pub-key:
+      path: jwt/pub.key
+
+access:
+  commonIgnores: 
+  ignore-suffixs: js,css,png,html
+  intercepts:
+    admin: /back/
+  ignores:
+    admin: /login,/back/swagger-resources,/back/v2,/back/login
