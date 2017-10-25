@@ -5,7 +5,7 @@ spring:
     banner-mode: "off"
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.100.196/small-register?serverTimezone=UTC&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true
+    url: jdbc:mysql://192.168.100.196/small_register?serverTimezone=UTC&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true
     userName: root
     password: 123456
     initialSize: 10
