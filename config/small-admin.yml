@@ -6,8 +6,8 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://192.168.100.196/small_admin?serverTimezone=UTC&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true
-    userName: root
-    password: 123456
+    userName: small_admin
+    password: small_admin
     initialSize: 1
     minIdle: 1
     maxActive: 20
