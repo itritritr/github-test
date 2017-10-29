@@ -59,7 +59,7 @@ zuul:
       path: /back/**
       serviceId: small-admin
     trigger:
-      path: /groups/**
+      path: /back/**
       serviceId: small-trigger
      
 access:
