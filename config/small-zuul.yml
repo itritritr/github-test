@@ -59,10 +59,10 @@ zuul:
       path: /back/**
       serviceId: small-admin
     trigger:
-      path: /back/**
+      path: /groups/**
       serviceId: small-trigger
     arbitrationTribunal:
-      path: /back/**
+      path: /arbitration/**
       serviceId: small-arbitrationTribunal
      
 access:
