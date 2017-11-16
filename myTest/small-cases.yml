@@ -42,9 +42,9 @@ spring:
     banner-mode: "off"
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1/small_case?serverTimezone=UTC&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true
-    userName: small_case
-    password: small_case
+    url: jdbc:mysql://localhost:3306/small_case?serverTimezone=UTC&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true
+    userName: root
+    password: 123456
     initialSize: 1
     minIdle: 1
     maxActive: 20
