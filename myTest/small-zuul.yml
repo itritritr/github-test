@@ -1,0 +1,86 @@
+server:
+  #8020-8029
+  port: 8020
+  tomcat:
+    min-spare-threads: 20
+    max-threads: 1000
+    max-connections: 1000
+    accept-count: 1000
+  connection-timeout: 5000
+
+management:
+  security:
+    enabled: false
+
+ribbon:
+  eureka:
+    enabled: true
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: false
+
+feign:
+  hystrix:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1000 #并发执行的最大线程数，默认10
+      maxQueueSize: 1000 #BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 500 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+          strategy: SEMAPHORE
+
+auth:
+  user:
+    token-header: Authorization
+    pub-key:
+      path: jwt/user/pub.key
+  enterprise:
+    token-header: Authorization
+    pub-key:
+      path: jwt/enterprise/pub.key
+
+zuul:
+  ignored-services: "*"
+  # sensitive-headers:
+  routes:
+    admin:
+      path: /back/**
+      serviceId: small-admin
+    company:
+      path: /enterprise/**
+      serviceId: small-enterprise
+    register: 
+      path: /register/**
+      serviceId: small-register
+    case: 
+      path: /case/**
+      serviceId: small-cases
+     
+access:
+  commonIgnores: /back/swagger-resources,/back/v2,/back/login
+  ignore-suffixs: js,css,html,jpg,png,gif
+  intercepts:
+    admin: /back/,/enterprise/manager/,/case/
+    isLogin: /back/,/enterprise/manager/,/case/
+    enterpriseIsLogin: /register/,/zuul/register/,/enterprise/user/
+  ignores:
+    admin: /admin/modifyPwd,/back/isLogin
+    isLogin: 
+    enterpriseIsLogin: 

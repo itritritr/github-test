@@ -1,0 +1,46 @@
+server:
+  #8030-8039
+  port: 8030
+  tomcat:
+    min-spare-threads: 20
+    max-threads: 1000
+    max-connections: 1000
+    accept-count: 1000
+  connection-timeout: 5000
+
+management:
+  security:
+    enabled: false
+
+spring:
+  main:
+    banner-mode: "off"
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1/small_admin?serverTimezone=UTC&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true
+    userName: small_admin
+    password: small_admin
+    initialSize: 1
+    minIdle: 1
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxPoolPreparedStatementPerConnectionSize: -1
+    filters: stat,wall,config
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+logging:
+  config: classpath:config/log4j2.xml
+
+jwt:
+  expire: 86400
+  pri-key:
+    path: jwt/pri.key
+  pub-key:
+    path: jwt/pub.key

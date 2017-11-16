@@ -1,0 +1,71 @@
+server:
+  #8100-8109
+  port: 8100
+  tomcat:
+    min-spare-threads: 20
+    max-threads: 1000
+    max-connections: 1000
+    accept-count: 1000
+  connection-timeout: 5000
+
+management:
+  security:
+    enabled: false
+
+spring:
+  main:
+    banner-mode: "off"
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1/small_enterprise?serverTimezone=UTC&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true
+    userName: small_enterprise
+    password: small_enterprise
+    initialSize: 1
+    minIdle: 1
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxPoolPreparedStatementPerConnectionSize: -1
+    filters: stat,wall,config
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+logging:
+  config: classpath:config/log4j2.xml
+
+jwt:
+  expire: 36000
+  pri-key:
+    path: jwtApi/pri.key
+  pub-key:
+    path: jwtApi/pub.key
+
+feign:
+  hystrix:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1000 #并发执行的最大线程数，默认10
+      maxQueueSize: 1000 #BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 500 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+          strategy: SEMAPHORE
