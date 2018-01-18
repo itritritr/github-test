@@ -24,8 +24,8 @@ spring:
     asyncInit: true
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://127.0.0.1/small_admin?serverTimezone=UTC&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true
-    userName: small_admin
-    password: small_admin
+    userName: root
+    password: 123456
     initialSize: 2
     minIdle: 1
     maxActive: 20
@@ -58,7 +58,7 @@ aliyunOSS:
   bucketName: bucket20171023
 #redis配置文件
 redisson:
-  url: https://gitee.com/fennye/config-common/raw/master/config/redisson.yml
+  url: https://github.com/itritritr/github-test/blob/master/config1/redisson.yml
 #短信配置
 sms:
   url: http://106.15.224.15:8088/sms.aspx
