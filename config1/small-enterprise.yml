@@ -23,8 +23,8 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://127.0.0.1/small_enterprise?serverTimezone=UTC&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true
-    userName: small_enterprise
-    password: small_enterprise
+    userName: root
+    password: 123456
     initialSize: 1
     minIdle: 1
     maxActive: 20
@@ -51,7 +51,7 @@ jwt:
     path: jwtApi/pub.key
 #redis配置文件
 redisson:
-  url: https://gitee.com/fennye/config-common/raw/master/config/redisson.yml
+  url: https://github.com/itritritr/github-test/blob/master/config1/redisson.yml
 
 feign:
   hystrix:
