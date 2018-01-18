@@ -1,24 +1,110 @@
-singleServerConfig:
-  idleConnectionTimeout: 10000
-  pingTimeout: 1000
-  connectTimeout: 10000
-  timeout: 3000
-  retryAttempts: 3
-  retryInterval: 1500
-  reconnectionTimeout: 3000
-  failedAttempts: 3
-  password: null
-  subscriptionsPerConnection: 5
-  clientName: fenny
-  address: "redis://eureka:6379"
-  subscriptionConnectionMinimumIdleSize: 1
-  subscriptionConnectionPoolSize: 50
-  connectionMinimumIdleSize: 10
-  connectionPoolSize: 100
-  database: 0
-  dnsMonitoring: false
-  dnsMonitoringInterval: 5000
-threads: 0
-nettyThreads: 0
-codec: !<org.redisson.codec.JsonJacksonCodec> {}
-useLinuxNativeEpoll: false
+server:
+  #8110-8119
+  port: 8110
+  tomcat:
+    min-spare-threads: 20
+    max-threads: 1000
+    max-connections: 1000
+    accept-count: 1000
+  connection-timeout: 5000
+
+management:
+  security:
+    enabled: false
+
+feign:
+  hystrix:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1000 #并发执行的最大线程数，默认10
+      maxQueueSize: 1000 #BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 500 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+          strategy: SEMAPHORE
+
+spring:
+  main:
+    banner-mode: "off"
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: test
+    password: test
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1/small_case?serverTimezone=UTC&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true
+    userName: small_case
+    password: small_case
+    initialSize: 1
+    minIdle: 1
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxPoolPreparedStatementPerConnectionSize: -1
+    filters: stat,wall,config
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+logging:
+  config: classpath:config/log4j2.xml
+#redis配置文件
+redisson:
+  url: https://gitee.com/fennye/config-common/raw/master/config/redisson.yml
+#阿里云OSS
+aliyunOSS:
+  endpoint: http://oss-cn-shenzhen.aliyuncs.com
+  accessKeyId: LTAINGfHoGAG7x9K
+  accessKeySecret: MAqsw2Ge0D8eeI1udOmTmUdT40XSTH
+  bucketName: bucket20171023
+#仲裁书模板
+arbitral-award: <!DOCTYPE html><html><head><meta charset="utf-8"><style>#arbitral-award{color:#000}#arbitral-award *{padding:0;margin:0}#arbitral-award p{line-height:32px;font-size:17px;color:#000;text-indent:2em}#arbitral-award h1,h3{text-align:center}#arbitral-award .red{color:red}</style></head><body><div id="arbitral-award"><h1>湛江仲裁委员会裁决书</h1><p style="text-align:right">(<span class="red">2017</span>)湛仲字第　　号</p><p>申请人：北京恒元信业信息技术有限公司，住所地北京市丰台区方庄芳群园三区1号楼86126。</p><p>法定代表人：刘蘭奇。</p><p>被申请人：</p><p>湛江仲裁委员会根据申请人和被申请人于<span class="red" style="color:red">xx年xx月xx日</span>提交的《借款协议》、《调解协议》项下的仲裁条款以及申请人提交的《仲裁申请书》，受理“民间借贷纠纷”一案。</p><p>根据双方当事人委托指定,本案于<span class="red">xx年xx月xx日</span>依法组成仲裁员xx的独任仲裁庭并置于互联网不公开、不开庭审理。本案现已审理终结。</p><p>现就本案案情和裁决结果分述如下：</p><h3>一、案 情</h3><p>根据双方签订的《借款协议》和《调解协议》，双方确认事实如下：被申请人<span class="red">xxx于xx年xx月xx日</span>通过<span class="red">xxx</span>居间签订了《借款协议》，约定借款本金总额为<span class="red">xxx</span>元，借款期限为<span class="red">xx</span>个月，借款期限内年利率为<span class="red">xxx%</span>。还款方式为等额本息还款，每月还款<span class="red">xxx</span>元。同日，申请人与被申请人签订《调解协议》，对还款时间、利息及逾期利息作出约定。</p><h3>二、裁 决</h3><p>双方同意根据《调解协议》的结果制作裁决书进行确认，依照《中华人民共和国合同法》第八条和《中华人民共和国仲裁法》第三十九条、第五十一条之规定，仲裁庭裁决如下：</p><p>一、确认被申请人<span class="red">xxx</span>尚欠申请人借款本金xx元。</p><p>二、限被申请人<span class="red">xxx自xx年xx月xx日起至xx年xx月xx日</span>止，按月等额本息向申请人还款，每月还款金额为<span class="red">xxx</span>元。</p><p>三、被申请人若未按上述第一项约定按期、足额履行任一期还款、付息义务且逾期达到5日以上，申请人有权要求被申请人一次性偿还全部借款本金及到期利息，并自逾期之日起以未偿还借款本金为基数，按月利率2%向申请人支付逾期利息，直至借款还清为止。</p><p>四、本案仲裁费<span class="red">xxx</span>元由被申请人承担，申请人已垫付，本委不予退回，被申请人在履行上述义务时一并支付给申请人。</p><p>本裁决为终局裁决，自作出之日起即发生法律效力。</p><div style="margin:20px 0 0 350px"><p>独任仲裁员<span id="arbitral-img"></span></p><p><span class="red">二〇一七年xx月xx日</span></p><p>秘    书  <span class="red">xxx</span></p></div></div></body></html>
+#生成PDF所需字体文件
+pdf-font-dir: /Users/yefeng/Downloads/fonts
+#PDF签章
+PDFSign:
+  #临时文件(修改该参数,需要重启该模块)
+  tmpDic: /Users/yefeng/Downloads/testzc
+  #数字证书(修改该参数,要重启该模块)
+  cert: /Users/yefeng/Downloads/testzc/iSignature.pfx
+  #数字证书存储密码
+  certKeystorePwd: 123456
+  #数字证书密码
+  certPwd: 123456
+  #tsa客户端地址 
+  tsaClientUrl: http://test1.tsa.cn/tsa
+  #tsa账号
+  username: tsademo
+  #tsa密码  
+  password: tsademo
+  #加载电子图章key文件
+  key: /Users/yefeng/Downloads/testzc/unitrust.key
+  #正式版本的电子签章软件需设置为1
+  sealNumb: 0
+  #图章密码
+  sealPwd: 123456
+  #盖章位置,中文搜索位置
+  searchText: 独任仲裁员
+  #以searchText为起点设置x
+  textOffsetX: 10
+  #以searchText为起点设置y 
+  textOffsetY: -30
