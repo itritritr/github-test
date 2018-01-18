@@ -48,8 +48,8 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://127.0.0.1/small_case?serverTimezone=UTC&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true
-    userName: small_case
-    password: small_case
+    userName: root
+    password: 123456
     initialSize: 1
     minIdle: 1
     maxActive: 20
@@ -69,7 +69,7 @@ logging:
   config: classpath:config/log4j2.xml
 #redis配置文件
 redisson:
-  url: https://gitee.com/fennye/config-common/raw/master/config/redisson.yml
+  url: https://github.com/itritritr/github-test/blob/master/config1/redisson.yml
 #阿里云OSS
 aliyunOSS:
   endpoint: http://oss-cn-shenzhen.aliyuncs.com
